@@ -2,19 +2,34 @@
 
 //static void	ft_check_flag(){}
 
-static void ft_xpux(char c, va_list ap)
+static void ft_xpuX(char c, va_list ap)
 {
-	//int		i;
-	//char			ch;
-	//char			*str;
-	unsigned long	p;
+	unsigned int	n;
+	size_t		p;
+	char		*strnum;
 
 	if (c == '%')
 		write(1, "%", 1);
+	else if (c == 'x' || c == 'X')
+	{
+		n = va_arg(ap, unsigned int);
+		if (c == 'x')
+			ft_decToHex(n, "0123456789abcdef");
+		else if (c == 'X')
+			ft_decToHex(n, "0123456789ABCDEF");
+	}
 	else if (c == 'p')
 	{
-		p = va_arg(ap, unsigned long);
-		ft_ulToHex(p);
+		p = (size_t)va_arg(ap, void*);
+		write(1, "0x", 2);
+		ft_decToHex(p, "0123456789abcdef");
+	}
+	else if (c == 'u')
+	{
+		n = va_arg(ap, unsigned int);
+		strnum = ft_itoa(n);
+		ft_printstr(strnum);
+		free(strnum);
 	}
 
 }
@@ -22,12 +37,12 @@ static void ft_csdi(char c, va_list ap)
 {
 	int		i;
 	char	ch;
-	char	*str;
+	char	*strnum;
 
 	if (c == 's')
 	{
-		str = va_arg(ap, char *);
-		ft_printstr(str);
+		strnum = va_arg(ap, char *);
+		ft_printstr(strnum);
 	}
 	else if (c == 'c')
 	{
@@ -37,9 +52,9 @@ static void ft_csdi(char c, va_list ap)
 	else if (c == 'd' || c == 'i')
 	{
 		i = va_arg(ap, int);
-		str = ft_itoa(i);
-		ft_printstr(str);
-		free(str);
+		strnum = ft_itoa(i);
+		ft_printstr(strnum);
+		free(strnum);
 	}
 }
 
@@ -53,7 +68,7 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			ft_xpux(*format, ap);
+			ft_xpuX(*format, ap);
 			ft_csdi(*format, ap);
 			//ft_check_flag(*format);
 			//ft_check_flag(*format, ap);

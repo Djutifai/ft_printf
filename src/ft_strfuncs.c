@@ -12,24 +12,21 @@ void	ft_printstr(char *str)
 	}
 }
 
-void	ft_ulToHex(unsigned long p)
-{
-	char			*str;
-	unsigned long	remainder;
-	unsigned long	quotient;
-	size_t			i;
 
-	i = 0;
-	write(1, "0x", 2);
-	remainder = p % 16;
-	quotient = p / 16;
-	while (quotient != 0)
+void	ft_decToHex(unsigned int n, char *base)
+{
+	unsigned int i;
+
+	if (n >= 16)
 	{
-		//deal with it
-		p = quotient;
-		remainder = p % 16;
-		quotient = p / 16;
+		i = n % 16;
+		n = n / 16;
+		ft_decToHex(n, base);
+		write(1, &(base[i]), 1);
 	}
-	ft_printstr(str);
-	free(str);
+	else if (n >= 0 && n < 16)
+	{
+		i = n % 16;
+		write(1, &(base[i]), 1);
+	}
 }
