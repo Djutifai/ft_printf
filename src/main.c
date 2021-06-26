@@ -1,9 +1,9 @@
-#include "ft_printf.c"
-#include "ft_strfuncs.c"
 #include <stdio.h>
 #include <unistd.h>
+#include "../includes/ft_printf.h"
 int main(void)
 {
-	(void)ft_printf("%d %i",10,20);
+	ft_printf("%x\n",12341234);
+	printf("%x\n",12341234);
 	return (0);
 }
