@@ -22,6 +22,7 @@ ARFLAGS		=		rc
 		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 $(NAME):		${LIBFT} ${OBJS}
+				make -C libft
 				ar rc libft/libft.a ${OBJS}
 				cp libft/libft.a ${NAME}
 				gcc src/main.c ${NAME}
@@ -29,10 +30,14 @@ $(NAME):		${LIBFT} ${OBJS}
 all:			$(NAME)
 
 
-clean:	
+clean:
+		make clean -C libft
+		${RM} ${OBJS}
+
+fclean: clean
+		make fclean -C libft
 		${RM} ${OBJS} ${NAME}
 
-$(LIBFT):
-				make -C libft
+re:		fclean	all
 
-.PHONY: all clean fclean re $(LIBFT)
+.PHONY: all clean fclean re

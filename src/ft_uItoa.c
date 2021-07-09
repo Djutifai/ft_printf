@@ -1,16 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ftassada <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/21 11:45:55 by ftassada          #+#    #+#             */
-/*   Updated: 2021/06/26 20:04:19 by ftassada         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../includes/ft_printf.h"
+#include "../includes/printf.h"
 
 static	void	ft_recursion(char **res, unsigned int n)
 {
@@ -45,11 +33,10 @@ static	int	ft_count_digits(unsigned int n)
 	return (res);
 }
 
-char	*ft_uItoa(unsigned int n, int *wid_pre)
+char	*ft_uItoa(unsigned int n)
 {
 	char	*res;
 	int		digits;
-	(void)wid_pre;
 
 	digits = ft_count_digits(n);
 	res = (char *)ft_calloc(digits + 1, sizeof(*res));

@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <unistd.h>
-#include "../includes/ft_printf.h"
+#include "../includes/printf.h"
 int main(void)
 {
-	ft_printf("%x\n",12341234);
-	printf("%x\n",12341234);
+	printf("%i", printf("%i %s qwe%%\n", 213123213123, "qweqwewqeqwe") == printf("%i %s qwe%%\n", 213123213123, "qweqwewqeqwe"));
 	return (0);
 }
