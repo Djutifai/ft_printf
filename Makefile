@@ -2,7 +2,7 @@ SRCS		=		src/ft_printf.c src/ft_strfuncs.c src/ft_uItoa.c
 
 OBJS		=		${SRCS:.c=.o}
 
-HEADER		=		includes/myprintf.h
+HEADER		=		includes/printf.h
 
 NAME		=		libftprintf.a
 
@@ -18,14 +18,13 @@ LIBFT		=		libft
 
 ARFLAGS		=		rc
 
-%o: %c
+%o: %c ${HEADER}
 		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-$(NAME):		${LIBFT} ${OBJS}
+$(NAME):		${LIBFT} ${OBJS} ${HEADER}
 				make -C libft
 				ar rc libft/libft.a ${OBJS}
 				cp libft/libft.a ${NAME}
-				gcc src/main.c ${NAME}
 
 all:			$(NAME)
 
