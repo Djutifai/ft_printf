@@ -6,7 +6,7 @@
 /*   By: ftassada <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 13:08:37 by ftassada          #+#    #+#             */
-/*   Updated: 2021/06/13 19:56:14 by ftassada         ###   ########.fr       */
+/*   Updated: 2021/07/10 17:43:47 by ftassada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
+
 typedef struct s_list
 {
 	void			*content;

@@ -34,6 +34,11 @@ static void	ft_csdi(char c, va_list ap, size_t *counter)
 	if (c == 's')
 	{
 		strnum = va_arg(ap, char *);
+		if (strnum == NULL)
+		{
+			ft_print_null(counter);
+			return ;
+		}
 		*counter += ft_strlen(strnum);
 		ft_printstr(strnum);
 	}

@@ -9,4 +9,6 @@ void	ft_printstr(char *str);
 void	ft_decToHex(unsigned int n, char *base, size_t *counter);
 void	ft_printP(void *arg, char *base, size_t *counter);
 char	*ft_uItoa(unsigned int n);
+void	ft_print_null(size_t *counter);
+
 #endif
