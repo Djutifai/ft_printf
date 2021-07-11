@@ -1,4 +1,4 @@
-#include "../includes/printf.h"
+#include "../includes/ft_printf.h"
 
 static void	ft_xpuX(char c, va_list ap, size_t *counter)
 {
@@ -63,7 +63,7 @@ int	ft_printf(const char *format, ...)
 
 	counter = 0;
 	va_start(ap, format);
-	while (*format)
+	while (*format && format)
 	{
 		if (*format == '%')
 		{
@@ -76,7 +76,8 @@ int	ft_printf(const char *format, ...)
 			write(1, &(*format), 1);
 			counter++;
 		}
-		format++;
+		if (*format)
+			format++;
 	}
 	va_end(ap);
 	return (counter);

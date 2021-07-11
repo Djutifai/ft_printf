@@ -2,7 +2,7 @@ SRCS		=		src/ft_printf.c src/ft_strfuncs.c src/ft_uItoa.c
 
 OBJS		=		${SRCS:.c=.o}
 
-HEADER		=		includes/printf.h
+HEADER		=		includes/ft_printf.h
 
 NAME		=		libftprintf.a
 

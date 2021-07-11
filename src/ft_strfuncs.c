@@ -1,4 +1,4 @@
-#include "../includes/printf.h"
+#include "../includes/ft_printf.h"
 
 void	ft_printstr(char *str)
 {
@@ -43,12 +43,6 @@ void	ft_printP(void *arg, char *base, size_t *counter)
 	size_t	i;
 	size_t	sarg;
 
-	if (arg == NULL)
-	{
-		write(1, "0x0", 3);
-		*counter += 3;
-		return ;
-	}
 	sarg = (size_t)arg;
 	if (sarg >= 16)
 	{
