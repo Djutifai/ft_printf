@@ -22,7 +22,7 @@ static int	ft_xpX(char c, va_list ap, size_t *counter)
 	}
 	else if (c == 'p')
 		ft_printP(va_arg(ap, void *), "0123456789abcdef", counter);
-	if (c == '%' || c == 'x' || c == 'X' || c == 'p' || c == 'p' || c == 'u')
+	if (c == '%' || c == 'x' || c == 'X' || c == 'p')
 		return (1);
 	return (0);
 }
@@ -47,7 +47,7 @@ static int	ft_cs(char c, va_list ap, size_t *counter)
 		*counter += 1;
 		ft_putchar_fd(va_arg(ap, int), 1);
 	}
-	if (c == 's' || c == 'c' || c == 'd' || c == 'i')
+	if (c == 's' || c == 'c')
 		return (1);
 	return (0);
 }
