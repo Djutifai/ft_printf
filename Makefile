@@ -18,10 +18,10 @@ LIBFT		=		libft
 
 ARFLAGS		=		rc
 
-%o: %c ${HEADER}
+%o: %c ${HEADER} Makefile
 		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-$(NAME):		${LIBFT} ${OBJS} ${HEADER}
+$(NAME):		${LIBFT} ${OBJS} ${HEADER} Makefile
 				make -C libft
 				ar rc libft/libft.a ${OBJS}
 				cp libft/libft.a ${NAME}

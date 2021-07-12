@@ -1,9 +1,13 @@
 #include "../includes/ft_printf.h"
 
-static void	ft_xpuX(char c, va_list ap, size_t *counter)
+static void	ft_write_char(char c, size_t *counter)
 {
-	char			*strnum;
+	write(1, &c, 1);
+	*counter += 1;
+}
 
+static int	ft_xpX(char c, va_list ap, size_t *counter)
+{
 	if (c == '%')
 	{
 		*counter += 1;
@@ -18,16 +22,12 @@ static void	ft_xpuX(char c, va_list ap, size_t *counter)
 	}
 	else if (c == 'p')
 		ft_printP(va_arg(ap, void *), "0123456789abcdef", counter);
-	else if (c == 'u')
-	{
-		strnum = ft_uItoa(va_arg(ap, unsigned int));
-		*counter += ft_strlen(strnum);
-		ft_printstr(strnum);
-		free(strnum);
-	}
+	if (c == '%' || c == 'x' || c == 'X' || c == 'p' || c == 'p' || c == 'u')
+		return (1);
+	return (0);
 }
 
-static void	ft_csdi(char c, va_list ap, size_t *counter)
+static int	ft_cs(char c, va_list ap, size_t *counter)
 {
 	char	*strnum;
 
@@ -37,7 +37,7 @@ static void	ft_csdi(char c, va_list ap, size_t *counter)
 		if (strnum == NULL)
 		{
 			ft_print_null(counter);
-			return ;
+			return (0);
 		}
 		*counter += ft_strlen(strnum);
 		ft_printstr(strnum);
@@ -47,13 +47,32 @@ static void	ft_csdi(char c, va_list ap, size_t *counter)
 		*counter += 1;
 		ft_putchar_fd(va_arg(ap, int), 1);
 	}
-	else if (c == 'd' || c == 'i')
+	if (c == 's' || c == 'c' || c == 'd' || c == 'i')
+		return (1);
+	return (0);
+}
+
+static int	ft_diu(char c, va_list ap, size_t *counter)
+{
+	char	*strnum;
+
+	if (c == 'd' || c == 'i')
 	{
 		strnum = ft_itoa(va_arg(ap, int));
 		*counter += ft_strlen(strnum);
 		ft_printstr(strnum);
 		free(strnum);
 	}
+	else if (c == 'u')
+	{
+		strnum = ft_uItoa(va_arg(ap, unsigned int));
+		*counter += ft_strlen(strnum);
+		ft_printstr(strnum);
+		free(strnum);
+	}
+	if (c == 'd' || c == 'i' || c == 'u')
+		return (1);
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
@@ -68,14 +87,13 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			ft_xpuX(*format, ap, &counter);
-			ft_csdi(*format, ap, &counter);
+			if (!ft_xpX(*format, ap, &counter) && \
+					!ft_cs(*format, ap, &counter) && \
+					!ft_diu(*format, ap, &counter))
+				ft_write_char(*format, &counter);
 		}
 		else
-		{
-			write(1, &(*format), 1);
-			counter++;
-		}
+			ft_write_char(*format, &counter);
 		if (*format)
 			format++;
 	}
