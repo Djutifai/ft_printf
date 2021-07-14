@@ -6,7 +6,7 @@
 #    By: ftassada <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/16 20:09:55 by ftassada          #+#    #+#              #
-#    Updated: 2021/06/14 15:56:48 by ftassada         ###   ########.fr        #
+#    Updated: 2021/07/14 23:07:57 by ftassada         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,10 @@ NAME		=	libft.a
 
 AR			=	ar rc
 
-%o:				%c ${HEADER}
+%o:				%c ${HEADER} Makefile
 				gcc ${CFLAGS} -c $<
 
-$(NAME):		${OBJS}
+$(NAME):		${OBJS} ${HEADER} Makefile
 				${AR} ${NAME} ${OBJS}
 				ranlib	${NAME}
 
