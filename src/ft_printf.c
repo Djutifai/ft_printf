@@ -6,7 +6,7 @@ static void	ft_write_char(char c, size_t *counter)
 	*counter += 1;
 }
 
-static int	ft_xpX(char c, va_list ap, size_t *counter)
+static void	ft_xpX(char c, va_list ap, size_t *counter)
 {
 	if (c == '%')
 	{
@@ -22,12 +22,9 @@ static int	ft_xpX(char c, va_list ap, size_t *counter)
 	}
 	else if (c == 'p')
 		ft_printP(va_arg(ap, void *), "0123456789abcdef", counter);
-	if (c == '%' || c == 'x' || c == 'X' || c == 'p')
-		return (1);
-	return (0);
 }
 
-static int	ft_cs(char c, va_list ap, size_t *counter)
+static void	ft_cs(char c, va_list ap, size_t *counter)
 {
 	char	*strnum;
 
@@ -37,7 +34,7 @@ static int	ft_cs(char c, va_list ap, size_t *counter)
 		if (strnum == NULL)
 		{
 			ft_print_null(counter);
-			return (0);
+			return ;
 		}
 		*counter += ft_strlen(strnum);
 		ft_printstr(strnum);
@@ -47,12 +44,9 @@ static int	ft_cs(char c, va_list ap, size_t *counter)
 		*counter += 1;
 		ft_putchar_fd(va_arg(ap, int), 1);
 	}
-	if (c == 's' || c == 'c')
-		return (1);
-	return (0);
 }
 
-static int	ft_diu(char c, va_list ap, size_t *counter)
+static void	ft_diu(char c, va_list ap, size_t *counter)
 {
 	char	*strnum;
 
@@ -70,9 +64,6 @@ static int	ft_diu(char c, va_list ap, size_t *counter)
 		ft_printstr(strnum);
 		free(strnum);
 	}
-	if (c == 'd' || c == 'i' || c == 'u')
-		return (1);
-	return (0);
 }
 
 int	ft_printf(const char *format, ...)
@@ -82,15 +73,14 @@ int	ft_printf(const char *format, ...)
 
 	counter = 0;
 	va_start(ap, format);
-	while (*format && format)
+	while (format && *format)
 	{
 		if (*format == '%')
 		{
 			format++;
-			if (!ft_xpX(*format, ap, &counter) && \
-					!ft_cs(*format, ap, &counter) && \
-					!ft_diu(*format, ap, &counter))
-				ft_write_char(*format, &counter);
+			ft_xpX(*format, ap, &counter);
+			ft_cs(*format, ap, &counter);
+			ft_diu(*format, ap, &counter);
 		}
 		else
 			ft_write_char(*format, &counter);
